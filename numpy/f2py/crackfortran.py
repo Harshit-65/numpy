@@ -144,6 +144,7 @@ import os
 import copy
 import platform
 import codecs
+import ast
 from pathlib import Path
 try:
     import charset_normalizer

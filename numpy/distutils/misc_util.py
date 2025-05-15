@@ -14,6 +14,7 @@ from threading import local as tlocal
 from functools import reduce
 
 import distutils
+import ast
 from distutils.errors import DistutilsError
 
 # stores temporary directory of each thread to only create one per thread

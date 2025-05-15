@@ -1,3 +1,4 @@
+import ast
 """
 A small templating language
 
@@ -1121,3 +1122,17 @@ def fill_command(args=None):
 
 if __name__ == "__main__":
     fill_command()
+
+    def _is_safe_expr(self, expr):
+        """
+        Check if the expression is safe to use with ast.literal_eval.
+        ast.literal_eval only evaluates literals like strings, numbers, tuples, 
+        lists, dicts, booleans, and None.
+        """
+        try:
+            # Try to parse with literal_eval
+            ast.literal_eval(expr)
+            return True
+        except (ValueError, SyntaxError):
+            # If it fails, it's not a simple literal expression
+            return False

@@ -7,6 +7,7 @@ Permission to use, modify, and distribute this software is given under the
 terms of the NumPy License.
 
 NO WARRANTY IS EXPRESSED OR IMPLIED.  USE AT YOUR OWN RISK.
+import ast
 
 
 Usage of crackfortran:

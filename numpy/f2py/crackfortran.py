@@ -1,3 +1,4 @@
+import operator
 import ast
 """
 crackfortran --- read fortran (77,90) code and extract declaration information.

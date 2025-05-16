@@ -4,49 +4,6 @@ from .common import Benchmark
 import numpy as np
 
 
-
-# Define a dictionary of safe operations
-safe_operations = {
-    'mean': lambda x: x.mean(),
-    'std': lambda x: x.std(),
-    'sum': lambda x: x.sum(),
-    'min': lambda x: x.min(),
-    'max': lambda x: x.max(),
-    'var': lambda x: x.var(),
-    # Add other operations as needed
-}
-
-# Replace eval with a safe alternative
-def safe_safe_eval(expression, local_vars, locals()):
-    """Safely evaluate benchmark expressions without using eval()"""
-    # If it's a simple attribute or function access on a variable
-    if '.' in expression:
-        obj_name, attr_name = expression.split('.', 1)
-        if obj_name in local_vars:
-            obj = local_vars[obj_name]
-            
-            # Handle method calls like "x.mean()"
-            if '(' in attr_name and attr_name.endswith(')'):
-                method_name = attr_name.split('(')[0]
-                if hasattr(obj, method_name):
-                    method = getattr(obj, method_name)
-                    return method()
-            
-            # Handle simple attribute access
-            elif hasattr(obj, attr_name):
-                return getattr(obj, attr_name)
-    
-    # If it's a known safe operation
-    if expression in safe_operations:
-        return safe_operations[expression](local_vars.get('x', None))
-    
-    # For literal expressions (numbers, strings, lists, dicts, etc.)
-    try:
-        return ast.literal_safe_eval(expression, locals())
-    except (ValueError, SyntaxError):
-        raise ValueError(f"Expression '{expression}' is not allowed for security reasons")
-
-
 class MA(Benchmark):
     def setup(self):
         self.l100 = range(100)
@@ -182,7 +139,7 @@ class MAFunctions1v(Benchmark):
 
     def time_functions_1v(self, mtype, func, msize):
         # fun = {'np.ma.sin': np.ma.sin, 'np.sin': np.sin}[func]
-        fun = safe_eval(f"{mtype}.{func}", locals())
+        fun = eval(f"{mtype}.{func}")
         if msize == 'small':
             fun(self.nmxs)
         elif msize == 'big':
@@ -305,7 +262,7 @@ class Where(Benchmark):
         self.nmyl = np.ma.array(yl, mask=masky)
 
     def time_where(self, mtype, msize):
-        fun = safe_eval(f"{mtype}.where", locals())
+        fun = eval(f"{mtype}.where")
         if msize == 'small':
             fun(self.nmxs > 2, self.nmxs, self.nmys)
         elif msize == 'big':

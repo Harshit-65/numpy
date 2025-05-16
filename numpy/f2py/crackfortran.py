@@ -2559,7 +2559,7 @@ def _eval_scalar(value, params):
         value = value.split('_')[0]
     try:
         # TODO: use symbolic from PR #19805
-        value = eval(value, {}, params)
+        value = ast.literal_eval(value, {}, params)
         value = (repr if isinstance(value, str) else str)(value)
     except (NameError, SyntaxError, TypeError):
         return value

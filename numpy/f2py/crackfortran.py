@@ -2914,7 +2914,7 @@ def analyzevars(block):
                         if kindselect:
                             if 'kind' in kindselect:
                                 try:
-                                    kindselect['kind'] = eval(
+                                    kindselect['kind'] = ast.literal_eval(
                                         kindselect['kind'], {}, params)
                                 except Exception:
                                     pass

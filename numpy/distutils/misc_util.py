@@ -846,7 +846,7 @@ class Configuration:
             except ValueError:
                 break
             try:
-                caller_instance = eval('self', f.f_globals, f.f_locals)
+                caller_instance = ast.literal_eval('self', f.f_globals, f.f_locals)
                 break
             except NameError:
                 pass

@@ -2637,7 +2637,7 @@ def analyzevars(block):
             if 'len' in vars[n]['charselector']:
                 l = vars[n]['charselector']['len']
                 try:
-                    l = str(eval(l, {}, params))
+                    l = str(ast.literal_eval(l, {}, params))
                 except Exception:
                     pass
                 vars[n]['charselector']['len'] = l

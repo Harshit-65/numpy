@@ -5,5 +5,5 @@ Accepted NEPs (implementation in progress)
    :maxdepth: 1
 
 {% for nep, tags in neps.items() if tags['Status'] == 'Accepted' %}
-   {{ tags['Title'] }} <{{ tags['Filename'] }}>
+   {{ tags['Title'] }} <tag>{{ tags['Filename'] }}</tag>
 {% endfor %}

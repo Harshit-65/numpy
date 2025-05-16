@@ -2646,7 +2646,7 @@ def analyzevars(block):
             if 'kind' in vars[n]['kindselector']:
                 l = vars[n]['kindselector']['kind']
                 try:
-                    l = str(eval(l, {}, params))
+                    l = str(ast.literal_eval(l, {}, params))
                 except Exception:
                     pass
                 vars[n]['kindselector']['kind'] = l

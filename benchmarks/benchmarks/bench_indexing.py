@@ -26,7 +26,7 @@ class Indexing(Benchmark):
         code = "def run():\n    a[%s]%s"
         code = code % (sel, op)
 
-        exec(code, ns)
+        eval(code, ns)
         self.func = ns['run']
 
     def time_op(self, dtype, indexes, sel, op):

@@ -399,7 +399,7 @@ class Gnu95FCompiler(GnuFCompiler):
         return ""
 
     def _hash_files(self, filenames):
-        h = hashlib.sha1()
+        h = hashlib.sha256()
         for fn in filenames:
             with open(fn, 'rb') as f:
                 while True:

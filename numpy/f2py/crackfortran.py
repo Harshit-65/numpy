@@ -2985,7 +2985,7 @@ def param_eval(v, g_params, params, dimspec=None):
     """
     if dimspec is None:
         try:
-            p = eval(v, g_params, params)
+            p = ast.literal_eval(v, g_params, params)
         except Exception as msg:
             p = v
             outmess(f'param_eval: got "{msg}" on {v!r}\n')

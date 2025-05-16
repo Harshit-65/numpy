@@ -625,7 +625,7 @@ def l_or(*f):
     for i in range(len(f)):
         l1 = '%s,f%d=f[%d]' % (l1, i, i)
         l2.append('f%d(v)' % (i))
-    return eval(f"{l1}:{' or '.join(l2)}")
+    return ast.literal_eval(f"{l1}:{' or '.join(l2)}")
 
 
 def l_not(f):

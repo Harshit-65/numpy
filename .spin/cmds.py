@@ -11,6 +11,17 @@ from spin.cmds import meson
 
 IS_PYPY = (sys.implementation.name == 'pypy')
 
+# Define a whitelist of allowed modules
+ALLOWED_MODULES = {
+    # Add all necessary modules that should be allowed for dynamic import
+    # Customize this list based on your application's needs
+    'numpy.core': 'numpy.core',
+    'numpy.lib': 'numpy.lib',
+    'numpy.linalg': 'numpy.linalg',
+    # Add other required modules here
+}
+
+
 # Check that the meson git submodule is present
 curdir = pathlib.Path(__file__).parent
 meson_import_dir = curdir.parent / 'vendored-meson' / 'meson' / 'mesonbuild'

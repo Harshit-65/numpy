@@ -190,7 +190,7 @@ class MAFunctions2v(Benchmark):
         self.nmyl = np.ma.array(yl, mask=masky)
 
     def time_functions_2v(self, mtype, func, msize):
-        fun = eval(f"{mtype}.{func}")
+        fun = getattr(np.ma, func_name)(*args, **kwargs)
         if msize == 'small':
             fun(self.nmxs, self.nmys)
         elif msize == 'big':

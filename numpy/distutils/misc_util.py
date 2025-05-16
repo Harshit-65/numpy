@@ -156,13 +156,13 @@ def get_path_from_frame(frame, parent_path=None):
 
     # First, try to find if the file name is in the frame.
     try:
-        caller_file = eval('__file__', frame.f_globals, frame.f_locals)
+        caller_file = ast.literal_eval('__file__', frame.f_globals, frame.f_locals)
         d = os.path.dirname(os.path.abspath(caller_file))
     except NameError:
         # __file__ is not defined, so let's try __name__. We try this second
         # because setuptools spoofs __name__ to be '__main__' even though
         # sys.modules['__main__'] might be something else, like easy_install(1).
-        caller_name = eval('__name__', frame.f_globals, frame.f_locals)
+        caller_name = ast.literal_eval('__name__', frame.f_globals, frame.f_locals)
         __import__(caller_name)
         mod = sys.modules[caller_name]
         if hasattr(mod, '__file__'):
@@ -846,7 +846,7 @@ class Configuration:
             except ValueError:
                 break
             try:
-                caller_instance = eval('self', f.f_globals, f.f_locals)
+                caller_instance = ast.literal_eval('self', f.f_globals, f.f_locals)
                 break
             except NameError:
                 pass

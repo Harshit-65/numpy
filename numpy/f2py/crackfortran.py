@@ -3016,7 +3016,7 @@ def param_eval(v, g_params, params, dimspec=None):
     v_eval = []
     for item in v:
         try:
-            item = eval(item, g_params, params)
+            item = ast.literal_eval(item, g_params, params)
         except Exception as msg:
             outmess(f'param_eval: got "{msg}" on {item!r}\n')
         v_eval.append(item)

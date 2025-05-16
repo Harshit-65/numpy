@@ -155,7 +155,7 @@ def load_f2cmap_file(f2cmap_file):
     try:
         outmess(f'Reading f2cmap from {f2cmap_file!r} ...\n')
         with open(f2cmap_file) as f:
-            d = eval(f.read().lower(), {}, {})
+            d = ast.literal_eval(f.read().lower(), {}, {})
         f2cmap_all, f2cmap_mapped = process_f2cmap_dict(f2cmap_all, d, c2py_map, True)
         outmess('Successfully applied user defined f2cmap changes\n')
     except Exception as msg:
@@ -292,7 +292,7 @@ def getarrdims(a, var, verbose=0):
         dim = copy.copy(var['dimension'])
         ret['size'] = '*'.join(dim)
         try:
-            ret['size'] = repr(eval(ret['size']))
+            ret['size'] = repr(ast.literal_eval(ret['size']))
         except Exception:
             pass
         ret['dims'] = ','.join(dim)
@@ -445,7 +445,7 @@ def getinit(a, var):
                     ret['init.r'], ret['init.i'] = markoutercomma(
                         v[1:-1]).split('@,@')
                 else:
-                    v = eval(v, {}, {})
+                    v = ast.literal_eval(v, {}, {})
                     ret['init.r'], ret['init.i'] = str(v.real), str(v.imag)
             except Exception:
                 raise ValueError(

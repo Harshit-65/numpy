@@ -1,3 +1,4 @@
+import ast
 """
 Utility function to facilitate testing.
 
@@ -1284,7 +1285,7 @@ def assert_array_less(x, y, err_msg='', verbose=True, *, strict=False):
 
 
 def runstring(astr, dict):
-    exec(astr, dict)
+    ast.literal_eval(astr, dict)
 
 
 def assert_string_equal(actual, desired):

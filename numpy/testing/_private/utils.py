@@ -1568,8 +1568,18 @@ def measure(code_str, times=1, label=None):
     i = 0
     elapsed = jiffies()
     while i < times:
+
         i += 1
-        exec(code, globs, locs)
+def safe_import_and_run(module_name, function_name=None):
+    """Safely import a module and optionally run a function from it."""
+    import importlib
+    module = importlib.import_module(module_name)
+    if function_name:
+        func = getattr(module, function_name)
+        return func()
+    return module
+
+        safe_import_and_run(code, globs, locs)
     elapsed = jiffies() - elapsed
     return 0.01 * elapsed
 

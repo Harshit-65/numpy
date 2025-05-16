@@ -1,3 +1,4 @@
+import ast
 from .common import Benchmark
 
 import numpy as np

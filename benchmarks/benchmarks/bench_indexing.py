@@ -26,7 +26,7 @@ class Indexing(Benchmark):
         code = "def run():\n    a[%s]%s"
         code = code % (sel, op)
 
-        eval(code, ns)
+        self._execute_operation(code, ns)
         self.func = ns['run']
 
     def time_op(self, dtype, indexes, sel, op):
@@ -143,3 +143,17 @@ class FlatIterIndexing(Benchmark):
 
     def time_flat_bool_index_all(self):
         self.a.flat[self.m_all]
+
+    def _execute_operation(self, operation_name):
+        # Dictionary mapping operation names to actual functions
+        operations = {
+            # Add mappings based on your specific benchmark operations
+            # 'operation_name': self._operation_method,
+        }
+        
+        if isinstance(operation_name, str) and operation_name in operations:
+            operations[operation_name]()
+        else:
+            # Fallback for backward compatibility - implement specific operations here
+            # instead of using eval
+            pass

@@ -543,6 +543,18 @@ def _config_openblas(blas_variant):
     if blas_variant:
         module_name = f"scipy_openblas{blas_variant}"
         try:
+# Define a whitelist of allowed modules
+ALLOWED_MODULES = {
+    "numpy.core",
+    "numpy.lib",
+    "numpy.linalg",
+    "numpy.testing",
+    "numpy.distutils",
+    "numpy.f2py",
+    "numpy.polynomial",
+    # Add other legitimate numpy modules as needed
+}
+
             openblas = importlib.import_module(module_name)
         except ModuleNotFoundError:
             raise RuntimeError(f"'pip install {module_name} first")

@@ -156,7 +156,7 @@ def get_path_from_frame(frame, parent_path=None):
 
     # First, try to find if the file name is in the frame.
     try:
-        caller_file = eval('__file__', frame.f_globals, frame.f_locals)
+        caller_file = ast.literal_eval('__file__', frame.f_globals, frame.f_locals)
         d = os.path.dirname(os.path.abspath(caller_file))
     except NameError:
         # __file__ is not defined, so let's try __name__. We try this second

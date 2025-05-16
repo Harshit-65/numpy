@@ -162,7 +162,7 @@ def get_path_from_frame(frame, parent_path=None):
         # __file__ is not defined, so let's try __name__. We try this second
         # because setuptools spoofs __name__ to be '__main__' even though
         # sys.modules['__main__'] might be something else, like easy_install(1).
-        caller_name = eval('__name__', frame.f_globals, frame.f_locals)
+        caller_name = ast.literal_eval('__name__', frame.f_globals, frame.f_locals)
         __import__(caller_name)
         mod = sys.modules[caller_name]
         if hasattr(mod, '__file__'):

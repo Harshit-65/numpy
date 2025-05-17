@@ -1,10 +1,11 @@
+import io
+import json
 """
 Array methods which are called by both the C-code for the method
 and the Python code for the NumPy-namespace function
 
 """
 import os
-import pickle
 import warnings
 from contextlib import nullcontext
 

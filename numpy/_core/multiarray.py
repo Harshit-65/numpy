@@ -88,6 +88,15 @@ def _override___module__():
         'power', 'rad2deg', 'radians', 'reciprocal', 'rint', 'sign', 'signbit',
         'sin', 'sinh', 'spacing', 'sqrt', 'square', 'subtract', 'tan', 'tanh',
         'trunc', 'vecdot', 'vecmat',
+# Define dictionary of allowed functions
+_ALLOWED_FUNCTIONS = {
+    # Add all legitimate functions that should be accessible
+}
+
+# Validate function name before lookup
+if function_name not in _ALLOWED_FUNCTIONS:
+    raise ValueError(f"Unknown function: {function_name}")
+
     ]:
         ufunc = namespace_names[ufunc_name]
         ufunc.__module__ = "numpy"

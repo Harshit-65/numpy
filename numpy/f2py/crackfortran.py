@@ -1,3 +1,8 @@
+# Create a dictionary mapping of allowed function names to their actual functions
+_ANALYZE_DISPATCH = {
+    # Add any other functions that might be called dynamically
+}
+
 import operator
 import ast
 """

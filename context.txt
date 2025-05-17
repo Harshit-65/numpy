@@ -1,0 +1,41 @@
+            ret = f'{ret} only:'
+        if 'map' in use[m] and use[m]['map']:
+            c = ' '
+            for k in list(use[m]['map'].keys()):
+                if k == use[m]['map'][k]:
+                    ret = f'{ret}{c}{k}'
+                    c = ','
+                else:
+                    ret = f"{ret}{c}{k}=>{use[m]['map'][k]}"
+                    c = ','
+        if ret and ret[-1] == ',':
+            ret = ret[:-1]
+    return ret
+
+
+def true_intent_list(var):
+    lst = var['intent']
+    ret = []
+    for intent in lst:
+        try:
+            f = globals()[f'isintent_{intent}']
+        except KeyError:
+            pass
+        else:
+            if f(var):
+                ret.append(intent)
+    return ret
+
+
+def vars2fortran(block, vars, args, tab='', as_interface=False):
+    setmesstext(block)
+    ret = ''
+    nout = []
+    for a in args:
+        if a in block['vars']:
+            nout.append(a)
+    if 'commonvars' in block:
+        for a in block['commonvars']:
+            if a in vars:
+                if a not in nout:
+                    nout.append(a)

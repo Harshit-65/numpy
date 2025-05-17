@@ -203,6 +203,12 @@ skipfunctions = []
 usermodules = []
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def reset_global_f2py_vars():
     global groupcounter, grouplist, neededmodule, expectbegin
     global skipblocksuntil, usermodules, f90modulevars, gotnextfile
@@ -241,6 +247,12 @@ def reset_global_f2py_vars():
     previous_context = None
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def outmess(line, flag=1):
     global filepositiontext
 
@@ -273,6 +285,12 @@ for n in ['int', 'double', 'float', 'char', 'short', 'long', 'void', 'case', 'wh
     invbadnames[n + '_bn'] = n
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def rmbadname1(name):
     if name in badnames:
         errmess(f'rmbadname1: Replacing "{name}" with "{badnames[name]}".\n')
@@ -280,9 +298,21 @@ def rmbadname1(name):
     return name
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def rmbadname(names):
     return [rmbadname1(_m) for _m in names]
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def undo_rmbadname1(name):
     if name in invbadnames:
@@ -290,6 +320,12 @@ def undo_rmbadname1(name):
         return invbadnames[name]
     return name
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def undo_rmbadname(names):
     return [undo_rmbadname1(_m) for _m in names]
@@ -304,6 +340,12 @@ _free_f90_start = re.compile(r'[^c*]\s*[^\s\d\t]', re.I).match
 COMMON_FREE_EXTENSIONS = ['.f90', '.f95', '.f03', '.f08']
 COMMON_FIXED_EXTENSIONS = ['.for', '.ftn', '.f77', '.f']
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def openhook(filename, mode):
     """Ensures that filename is opened with correct encoding parameter.
@@ -336,6 +378,12 @@ def openhook(filename, mode):
     return open(filename, mode, encoding=encoding)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def is_free_format(fname):
     """Check if file is in free format Fortran."""
     # f90 allows both fixed and free format, assuming fixed unless
@@ -362,6 +410,12 @@ def is_free_format(fname):
 
 
 # Read fortran (77,90) code
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def readfortrancode(ffile, dowithline=show, istop=1):
     """
     Read fortran codes from files and
@@ -670,6 +724,12 @@ multilinepattern = re.compile(
     r"\s*(?P<before>''')(?P<this>.*?)(?P<after>''')\s*\Z", re.S), 'multiline'
 ##
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def split_by_unquoted(line, characters):
     """
     Splits the line into (line[:i], line[i:]),
@@ -690,6 +750,12 @@ def split_by_unquoted(line, characters):
         return (d["before"], d["after"])
     return (line, "")
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _simplifyargs(argsline):
     a = []
     for n in markoutercomma(argsline).split('@,@'):
@@ -702,6 +768,12 @@ def _simplifyargs(argsline):
 crackline_re_1 = re.compile(r'\s*(?P<result>\b[a-z]+\w*\b)\s*=.*', re.I)
 crackline_bind_1 = re.compile(r'\s*(?P<bind>\b[a-z]+\w*\b)\s*=.*', re.I)
 crackline_bindlang = re.compile(r'\s*bind\(\s*(?P<lang>[^,]+)\s*,\s*name\s*=\s*"(?P<lang_name>[^"]+)"\s*\)', re.I)
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def crackline(line, reset=0):
     """
@@ -861,6 +933,12 @@ def crackline(line, reset=0):
         analyzeline(m, pat[1], line)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def markouterparen(line):
     l = ''
     f = 0
@@ -878,6 +956,12 @@ def markouterparen(line):
         l = l + c
     return l
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def markoutercomma(line, comma=','):
     l = ''
@@ -898,10 +982,22 @@ def markoutercomma(line, comma=','):
     assert not f, repr((f, line, l))
     return l
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def unmarkouterparen(line):
     r = line.replace('@(@', '(').replace('@)@', ')')
     return r
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def appenddecl(decl, decl2, force=1):
     if not decl:
@@ -955,12 +1051,24 @@ real8pattern = re.compile(
 _intentcallbackpattern = re.compile(r'intent\s*\(.*?\bcallback\b', re.I)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _is_intent_callback(vdecl):
     for a in vdecl.get('attrspec', []):
         if _intentcallbackpattern.match(a):
             return 1
     return 0
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def _resolvetypedefpattern(line):
     line = ''.join(line.split())  # removes whitespace
@@ -972,6 +1080,12 @@ def _resolvetypedefpattern(line):
         return m1.group('name'), attrs, m1.group('params')
     return None, [], None
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def parse_name_for_bind(line):
     pattern = re.compile(r'bind\(\s*(?P<lang>[^,]+)(?:\s*,\s*name\s*=\s*["\'](?P<name>[^"\']+)["\']\s*)?\)', re.I)
     match = pattern.search(line)
@@ -981,6 +1095,12 @@ def parse_name_for_bind(line):
         # Remove the 'bind' construct from the line.
         line = line[:match.start()] + line[match.end():]
     return line, bind_statement
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def _resolvenameargspattern(line):
     line, bind_cname = parse_name_for_bind(line)
@@ -997,6 +1117,12 @@ def _resolvenameargspattern(line):
         return m1.group('name'), m1.group('args'), None, None
     return None, [], None, None
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def analyzeline(m, case, line):
     """
@@ -1566,6 +1692,12 @@ def analyzeline(m, case, line):
         outmess('analyzeline: No code implemented for line.\n')
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def appendmultiline(group, context_name, ml):
     if 'f2pymultilines' not in group:
         group['f2pymultilines'] = {}
@@ -1574,6 +1706,12 @@ def appendmultiline(group, context_name, ml):
         d[context_name] = []
     d[context_name].append(ml)
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def cracktypespec0(typespec, ll):
     selector = None
@@ -1616,6 +1754,12 @@ lenarraypattern = re.compile(
     r'\s*(@\(@\s*(?!/)\s*(?P<array>.*?)\s*@\)@\s*\*\s*(?P<len>.*?)|(\*\s*(?P<len2>.*?)|)\s*(@\(@\s*(?!/)\s*(?P<array2>.*?)\s*@\)@|))\s*(=\s*(?P<init>.*?)|(@\(@|)/\s*(?P<init2>.*?)\s*/(@\)@|)|)\s*\Z', re.I)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def removespaces(expr):
     expr = expr.strip()
     if len(expr) <= 1:
@@ -1630,6 +1774,12 @@ def removespaces(expr):
     expr2 = expr2 + expr[-1]
     return expr2
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def markinnerspaces(line):
     """
@@ -1667,6 +1817,12 @@ def markinnerspaces(line):
         escaped = c  # reset to non-backslash
     return fragment
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def updatevars(typespec, selector, attrspec, entitydecl):
     """
@@ -1837,6 +1993,12 @@ def updatevars(typespec, selector, attrspec, entitydecl):
     return last_name
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def cracktypespec(typespec, selector):
     kindselect = None
     charselect = None
@@ -1896,6 +2058,12 @@ def cracktypespec(typespec, selector):
 ######
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def setattrspec(decl, attr, force=0):
     if not decl:
         decl = {}
@@ -1923,6 +2091,12 @@ def setattrspec(decl, attr, force=0):
     return decl
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def setkindselector(decl, sel, force=0):
     if not decl:
         decl = {}
@@ -1936,6 +2110,12 @@ def setkindselector(decl, sel, force=0):
             decl['kindselector'][k] = sel[k]
     return decl
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def setcharselector(decl, sel, force=0):
     if not decl:
@@ -1952,6 +2132,12 @@ def setcharselector(decl, sel, force=0):
     return decl
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def getblockname(block, unknown='unknown'):
     if 'name' in block:
         return block['name']
@@ -1959,6 +2145,12 @@ def getblockname(block, unknown='unknown'):
 
 # post processing
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def setmesstext(block):
     global filepositiontext
@@ -1969,6 +2161,12 @@ def setmesstext(block):
         pass
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def get_usedict(block):
     usedict = {}
     if 'parent_block' in block:
@@ -1977,6 +2175,12 @@ def get_usedict(block):
         usedict.update(block['use'])
     return usedict
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def get_useparameters(block, param_map=None):
     global f90modulevars
@@ -2007,6 +2211,12 @@ def get_useparameters(block, param_map=None):
 
     return param_map
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def postcrack2(block, tab='', param_map=None):
     global f90modulevars
@@ -2039,6 +2249,12 @@ def postcrack2(block, tab='', param_map=None):
 
     return block
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def postcrack(block, args=None, tab=''):
     """
@@ -2135,6 +2351,12 @@ def postcrack(block, args=None, tab=''):
     return block
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def sortvarnames(vars):
     indep = []
     dep = []
@@ -2168,6 +2390,12 @@ def sortvarnames(vars):
             i = 0
     return indep
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def analyzecommon(block):
     if not hascommon(block):
@@ -2210,6 +2438,12 @@ def analyzecommon(block):
         block['commonvars'] = block['commonvars'] + commonvars
     return block
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def analyzebody(block, args, tab=''):
     global usermodules, skipfuncs, onlyfuncs, f90modulevars
@@ -2256,6 +2490,12 @@ def analyzebody(block, args, tab=''):
     return body
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def buildimplicitrules(block):
     setmesstext(block)
     implicitrules = defaultimplicitrules
@@ -2275,6 +2515,12 @@ def buildimplicitrules(block):
     return implicitrules, attrrules
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def myeval(e, g=None, l=None):
     """ Like `eval` but returns only integers and floats """
     r = ast.literal_eval(e, g, l)
@@ -2285,6 +2531,12 @@ def myeval(e, g=None, l=None):
 
 getlincoef_re_1 = re.compile(r'\A\b\w+\b\Z', re.I)
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def getlincoef(e, xset):  # e = a*x+b ; x in xset
     """
@@ -2357,6 +2609,12 @@ def getlincoef(e, xset):  # e = a*x+b ; x in xset
 word_pattern = re.compile(r'\b[a-z][\w$]*\b', re.I)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _get_depend_dict(name, vars, deps):
     if name in vars:
         words = vars[name].get('depend', [])
@@ -2379,6 +2637,12 @@ def _get_depend_dict(name, vars, deps):
     return words
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _calc_depend_dict(vars):
     names = list(vars.keys())
     depend_dict = {}
@@ -2386,6 +2650,12 @@ def _calc_depend_dict(vars):
         _get_depend_dict(n, vars, depend_dict)
     return depend_dict
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def get_sorted_names(vars):
     depend_dict = _calc_depend_dict(vars)
@@ -2405,6 +2675,12 @@ def get_sorted_names(vars):
     return [name for name in names if name in vars]
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _kind_func(string):
     # XXX: return something sensible.
     if string[0] in "'\"":
@@ -2415,6 +2691,12 @@ def _kind_func(string):
         return 4
     return 'kind(' + string + ')'
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def _selected_int_kind_func(r):
     # XXX: This should be processor dependent
@@ -2431,6 +2713,12 @@ def _selected_int_kind_func(r):
         return 16
     return -1
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def _selected_real_kind_func(p, r=0, radix=0):
     # XXX: This should be processor dependent
@@ -2449,6 +2737,12 @@ def _selected_real_kind_func(p, r=0, radix=0):
         return 16
     return -1
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def get_parameters(vars, global_params={}):
     params = copy.copy(global_params)
@@ -2551,6 +2845,12 @@ def get_parameters(vars, global_params={}):
     return params
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _eval_length(length, params):
     if length in ['(:)', '(*)', '*']:
         return '(*)'
@@ -2559,6 +2859,12 @@ def _eval_length(length, params):
 
 _is_kind_number = re.compile(r'\d+_').match
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def _eval_scalar(value, params):
     if _is_kind_number(value):
@@ -2575,6 +2881,12 @@ def _eval_scalar(value, params):
                 % (msg, value, list(params.keys())))
     return value
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def analyzevars(block):
     """
@@ -2970,6 +3282,12 @@ def analyzevars(block):
 analyzeargs_re_1 = re.compile(r'\A[a-z]+[\w$]*\Z', re.I)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def param_eval(v, g_params, params, dimspec=None):
     """
     Creates a dictionary of indices and values for each parameter in a
@@ -3031,6 +3349,12 @@ def param_eval(v, g_params, params, dimspec=None):
 
     return p
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def param_parse(d, params):
     """Recursively parse array dimensions.
@@ -3112,6 +3436,12 @@ def param_parse(d, params):
         return d
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def expr2name(a, block, args=[]):
     orig_a = a
     a_is_expr = not analyzeargs_re_1.match(a)
@@ -3145,6 +3475,12 @@ def expr2name(a, block, args=[]):
             block['vars'][a] = setattrspec(block['vars'][a], 'external')
     return a
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def analyzeargs(block):
     setmesstext(block)
@@ -3181,6 +3517,12 @@ determineexprtype_re_4 = re.compile(r'\A\(.*\)\Z', re.I)
 determineexprtype_re_5 = re.compile(r'\A(?P<name>\w+)\s*\(.*?\)\s*\Z', re.I)
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _ensure_exprdict(r):
     if isinstance(r, int):
         return {'typespec': 'integer'}
@@ -3192,6 +3534,12 @@ def _ensure_exprdict(r):
         return r
     raise AssertionError(repr(r))
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def determineexprtype(expr, vars, rules={}):
     if expr in vars:
@@ -3237,6 +3585,12 @@ def determineexprtype(expr, vars, rules={}):
 
 ######
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def crack2fortrangen(block, tab='\n', as_interface=False):
     global skipfuncs, onlyfuncs
@@ -3312,6 +3666,12 @@ def crack2fortrangen(block, tab='\n', as_interface=False):
     return ret
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def common2fortran(common, tab=''):
     ret = ''
     for k in list(common.keys()):
@@ -3321,6 +3681,12 @@ def common2fortran(common, tab=''):
             ret = f"{ret}{tab}common /{k}/ {','.join(common[k])}"
     return ret
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def use2fortran(use, tab=''):
     ret = ''
@@ -3346,12 +3712,18 @@ def use2fortran(use, tab=''):
     return ret
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def true_intent_list(var):
     lst = var['intent']
     ret = []
     for intent in lst:
         try:
-            f = globals()[f'isintent_{intent}']
+            f = ALLOWED_GLOBALS[f'isintent_{intent}'] if f'isintent_{intent}' in ALLOWED_GLOBALS else ValueError(f"Access to {f'isintent_{intent}'} is not allowed")
         except KeyError:
             pass
         else:
@@ -3359,6 +3731,12 @@ def true_intent_list(var):
                 ret.append(intent)
     return ret
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def vars2fortran(block, vars, args, tab='', as_interface=False):
     setmesstext(block)
@@ -3491,6 +3869,12 @@ def vars2fortran(block, vars, args, tab='', as_interface=False):
 post_processing_hooks = []
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def crackfortran(files):
     global usermodules, post_processing_hooks
 
@@ -3508,6 +3892,12 @@ def crackfortran(files):
     return usermodules + postlist
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def crack2fortran(block):
     global f2py_version
 
@@ -3523,11 +3913,23 @@ def crack2fortran(block):
     return header + pyf + footer
 
 
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
+
 def _is_visit_pair(obj):
     return (isinstance(obj, tuple)
             and len(obj) == 2
             and isinstance(obj[0], (int, str)))
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def traverse(obj, visit, parents=[], result=None, *args, **kwargs):
     '''Traverse f2py data structure with the following visit function:
@@ -3594,6 +3996,12 @@ def traverse(obj, visit, parents=[], result=None, *args, **kwargs):
         return new_result
     return result_key, new_result
 
+
+# Dictionary of allowed globals that can be accessed dynamically
+ALLOWED_GLOBALS = {
+    # Add all necessary globals here that were previously accessed via globals()[name]
+    # Example: "function_name": function_name,
+}
 
 def character_backward_compatibility_hook(item, parents, result,
                                           *args, **kwargs):

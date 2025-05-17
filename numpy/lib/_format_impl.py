@@ -169,6 +169,23 @@ import warnings
 
 import numpy
 from numpy.lib._utils_impl import drop_metadata
+
+import io
+
+class RestrictedUnpickler(pickle.Unpickler):
+    """A restricted unpickler that only allows certain safe classes."""
+    
+    def find_class(self, module, name):
+        # Only allow safe classes from numpy
+        if module.startswith('numpy'):
+            return super().find_class(module, name)
+        # For any other module, disallow the load
+        raise pickle.UnpicklingError(f"Restricted unpickler: Attempting to load {module}.{name} which is not allowed")
+
+def safe_pickle_loads(data):
+    """Safely unpickle data by restricting which classes can be loaded."""
+    return RestrictedUnpickler(io.BytesIO(data)).load()
+
 from numpy._utils import set_module
 
 

@@ -1335,7 +1335,7 @@ def analyzeline(m, case, line):
                     initexpr = initexpr[1:].lower().replace('d', 'e').\
                         replace(',', '+1j*(')
             try:
-                v = eval(initexpr, {}, params)
+                v = ast.literal_eval(initexpr, {}, params)
             except (SyntaxError, NameError, TypeError) as msg:
                 errmess('analyzeline: Failed to evaluate %r. Ignoring: %s\n'
                         % (initexpr, msg))

@@ -5,5 +5,5 @@ Finished NEPs
    :maxdepth: 1
 
 {% for nep, tags in neps.items() if tags['Status'] == 'Final' %}
-   {{ tags['Title'] }} <{{ tags['Filename'] }}>
+   {{ tags['Title'] }} <{% raw %}{{[^}]*}}{% endraw %}>
 {% endfor %}

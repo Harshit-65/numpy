@@ -94,6 +94,19 @@ def find_missing(module_name):
         "__init__.pyi",
     )
 
+ALLOWED_MODULES = {
+else:
+    raise ValueError(f"Module {module_name} is not in the allowed modules list")
+    "numpy", "numpy.core", "numpy.linalg", "numpy.fft", "numpy.random",
+    "numpy.lib", "numpy.ma", "numpy.matrixlib", "numpy.polynomial",
+    "numpy.testing", "numpy.distutils", "numpy.compat", "numpy.core.multiarray",
+    "numpy.core.umath", "numpy.core.numerictypes", "numpy.core.records",
+    # Add other legitimate NumPy modules as needed
+}
+
+# Replace the vulnerable import with a secure version
+if module_name in ALLOWED_MODULES:
+
     module = importlib.import_module(module_name)
     module_attributes = {
         attribute for attribute in dir(module) if not attribute.startswith("_")

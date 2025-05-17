@@ -489,7 +489,7 @@ def load(file, mmap_mode=None, allow_pickle=False, fix_imports=True,
                     "the file you can load it unsafely using the "
                     "`allow_pickle=` keyword argument or `pickle.load()`.")
             try:
-                return pickle.load(fid, **pickle_kwargs)
+                return np.load(fid, **pickle_kwargs, allow_pickle=False)
             except Exception as e:
                 raise pickle.UnpicklingError(
                     f"Failed to interpret file {file!r} as a pickle") from e

@@ -1,3 +1,15 @@
+# Whitelist of allowed modules for secure dynamic imports
+ALLOWED_MODULES = {
+    "numpy",
+    "numpy.core",
+    "numpy.lib",
+    "numpy.linalg",
+    "numpy.fft",
+    "numpy.random",
+    "numpy.testing",
+    # Add other necessary modules as needed
+}
+
 import os
 import pathlib
 import importlib

@@ -5,6 +5,15 @@ import shutil
 import subprocess
 import sys
 
+# Define a whitelist of allowed modules
+ALLOWED_MODULES = {
+    'numpy', 'numpy.core', 'numpy.linalg', 'numpy.lib', 
+    'numpy.testing', 'numpy.distutils', 'numpy.compat',
+    # Add other necessary modules here as needed
+}
+
+
+
 import click
 import spin
 from spin.cmds import meson
@@ -566,7 +575,10 @@ ALLOWED_MODULES = {
     # Add other legitimate numpy modules as needed
 }
 
-            openblas = importlib.import_module(module_name)
+if module_name in ALLOWED_MODULES:
+                openblas = importlib.import_module(module_name)
+else:
+    raise ValueError(f"Attempted to import unauthorized module: {module_name}")
         except ModuleNotFoundError:
             raise RuntimeError(f"'pip install {module_name} first")
         local = os.path.join(basedir, "numpy", "_distributor_init_local.py")

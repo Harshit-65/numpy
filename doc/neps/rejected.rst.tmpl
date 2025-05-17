@@ -5,5 +5,5 @@ Rejected and Withdrawn NEPs
    :maxdepth: 1
 
 {% for nep, tags in neps.items() if tags['Status'] in ('Rejected', 'Withdrawn') %}
-   {{{{ tags['Title'] }}|e}} <{{{{ tags['Filename'] }}|e}}>
+   {{ {{ tags['Title'] |escape }}|e}} <{{ {{ tags['Filename'] |escape }}|e}}>
 {% endfor %}

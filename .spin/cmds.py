@@ -566,6 +566,12 @@ ALLOWED_MODULES = {
     # Add other legitimate numpy modules as needed
 }
 
+# Define a whitelist of allowed modules that can be imported
+ALLOWED_MODULES = {
+    "numpy", "numpy.core", "numpy.lib", "numpy.linalg", "numpy.testing",
+    "pytest", "unittest", "doctest",
+    # Add other legitimate modules as needed based on your application requirements
+}
             openblas = importlib.import_module(module_name)
         except ModuleNotFoundError:
             raise RuntimeError(f"'pip install {module_name} first")

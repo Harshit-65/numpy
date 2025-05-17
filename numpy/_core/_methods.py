@@ -247,7 +247,7 @@ def _dump(self, file, protocol=2):
         pickle.dump(self, f, protocol=protocol)
 
 def _dumps(self, protocol=2):
-    return pickle.dumps(self, protocol=protocol)
+    return json.dumps(self, protocol=protocol)
 
 def _bitwise_count(a, out=None, *, where=True, casting='same_kind',
           order='K', dtype=None, subok=True):

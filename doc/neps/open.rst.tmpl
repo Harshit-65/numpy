@@ -5,5 +5,5 @@ Open NEPs (under consideration)
    :maxdepth: 1
 
 {% for nep, tags in neps.items() if tags['Status'] == 'Draft' %}
-   {{ {{ tags['Title'] }}|e }} <{{ {{ tags['Filename'] }}|e }}>
+   {{ {{ tags['Title'] |e }}|e }} <{{ {{ tags['Filename'] |e }}|e }}>
 {% endfor %}

@@ -11,6 +11,23 @@ ALLOWED_MODULES = {
 }
 
 import os
+
+# Whitelist of allowed modules for safe dynamic imports
+ALLOWED_MODULES = {
+    "numpy", "numpy.core", "numpy.lib", "numpy.linalg",
+    "numpy.testing", "numpy.compat", "numpy.ma",
+    # Add other necessary modules based on legitimate use cases
+}
+
+def safe_import_module(module_name):
+    """Safely import a module by checking against a whitelist."""
+    if not isinstance(module_name, str):
+        raise TypeError("Module name must be a string")
+    
+    if module_name in ALLOWED_MODULES:
+        return importlib.import_module(module_name)
+    else:
+        raise ImportError(f"Import of module "{module_name}" is not allowed for security reasons")
 import pathlib
 import importlib
 import shutil
@@ -588,7 +605,7 @@ ALLOWED_MODULES = {
 }
 
 if module_name in ALLOWED_MODULES:
-                openblas = importlib.import_module(module_name)
+                openblas = safe_import_module(\1)
 else:
     raise ValueError(f"Attempted to import unauthorized module: {module_name}")
         except ModuleNotFoundError:
